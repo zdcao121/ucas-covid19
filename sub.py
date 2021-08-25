@@ -15,7 +15,7 @@ from random import randint
 from datetime import datetime
 from email.utils import formataddr
 from email.mime.text import MIMEText
-import telegram
+
 
 # 开启debug将会输出打卡填报的数据，关闭debug只会输出打卡成功或者失败，如果使用github actions，请务必设置该选项为False
 debug = False
@@ -243,7 +243,11 @@ def send_email(sender, mail_passwd, receiver, subject, msg):
 def send_telegram_message(bot_token, chat_id, msg):
     """
     Telegram通知打卡结果
+    python-telegram-bot 只支持 python 3.6或更高的版本
+    此处使用时再导入以保证向后兼容 python 3.5；
+    如果要使用 tg 消息通知，请使用 python 3.6或更高的版本
     """
+    import telegram 
     bot = telegram.Bot(token=bot_token)
     bot.send_message(chat_id=chat_id, text=msg)
 
