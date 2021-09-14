@@ -20,7 +20,7 @@
 1. 点击右上角`star` :)
 2. 安装方式一
    * 直接将项目下载到服务器上，推荐使用`git clone` 或者`wget`的方式
-   * 进入到项目文件夹中，使用`pip3 install -r requirement.txt`命令一键安装依赖或者手动安装。依赖库为`requests`和`pytz`
+   * 进入到项目文件夹中，使用`pip3 install -r requirements.txt`命令一键安装依赖或者手动安装。依赖库为`requests`和`pytz`
    * 修改项目文件夹里面`sub.py`代码里面的sep账号和密码
 3. 安装方式二
    * 下载本项目到本地
