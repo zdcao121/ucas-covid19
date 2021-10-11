@@ -170,7 +170,7 @@ $ crontab -e
 - 2021年1月29日 解决接触时间 1970-01-01的问题， 见 [issue 36](https://github.com/IanSmith123/ucas-covid19/issues/36)
 - 2021年8月2日 只允许 14 天内未离京的同学使用该程序，删除非必要的键，如果 14 天内有异动，提示手动打卡; 修改了方糖通知的 api 调用的 url；网站证书配置的问题似乎已经修复，目前设置为正常的验证 ssl 证书
 - 2021年8月15日 添加了 tg bot 消息推送；修复了 sender_email 默认不为空导致未配置邮件发送也会发送邮件的 bug，见  [PR#44](https://github.com/IanSmith123/ucas-covid19/pull/44)
-
+- 2021年10月11日 添加了网站无法访问时通知打卡失败的功能，见[PR#49](https://github.com/IanSmith123/ucas-covid19/pull/49) 
 
 # 致谢
 - 感谢 [karuboniru](https://github.com/IanSmith123/ucas-covid19/pull/1) 提供的github actions 支持
@@ -183,6 +183,7 @@ $ crontab -e
 - 感谢 [elfisworking](https://github.com/IanSmith123/ucas-covid19/pull/40) 添加了依赖文件和完善了服务器部署说明
 - 感谢 [waruto210](https://github.com/IanSmith123/ucas-covid19/pull/44) 添加了对 tg 通知的支持和修复了 smtp 邮件发送者默认不为空的 bug
 - 感谢 [Deathstr0ke1](https://github.com/IanSmith123/ucas-covid19/pull/47) 对文档的完善工作
+- 感谢 [Deathstr0ke1](https://github.com/IanSmith123/ucas-covid19/pull/49) 对网站出现异常造成打卡失败时没有发送通知的问题
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议</a>进行许可。
 
