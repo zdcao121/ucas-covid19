@@ -15,6 +15,7 @@ from random import randint
 from datetime import datetime
 from email.utils import formataddr
 from email.mime.text import MIMEText
+from requests.adapters import HTTPAdapter
 
 
 # 开启debug将会输出打卡填报的数据，关闭debug只会输出打卡成功或者失败，如果使用github actions，请务必设置该选项为False
@@ -76,7 +77,23 @@ def login(s: requests.Session, username, password, cookie_file: Path):
         "username": username,
         "password": password
     }
-    r = s.post("https://app.ucas.ac.cn/uc/wap/login/check", data=payload)
+
+    # 超时重试3次
+    s.mount('http://', HTTPAdapter(max_retries=3))
+    s.mount('https://', HTTPAdapter(max_retries=3))
+
+    try:
+        # 判断连接超时和读取超时的时间为30秒
+        r = s.post("https://app.ucas.ac.cn/uc/wap/login/check", data=payload, timeout=(30, 30))
+    except requests.exceptions.RequestException as e:
+        print("服务器连接异常", e)
+        message(api_key, sender_email, sender_email_passwd, receiver_email,
+                tg_bot_token, tg_chat_id, "健康打卡失败", "服务器连接异常，建议手动检查疫情防控打卡页面是否能够正常加载")
+
+    if r.status_code != 200:
+        print("服务器返回状态异常")
+        message(api_key, sender_email, sender_email_passwd, receiver_email,
+                tg_bot_token, tg_chat_id, "健康打卡失败", "服务器返回状态异常，建议手动检查疫情防控打卡页面是否能够正常加载")
 
     # print(r.text)
     if r.json().get('m') != "操作成功":
